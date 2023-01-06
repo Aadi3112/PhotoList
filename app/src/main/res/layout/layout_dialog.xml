@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="5dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="20dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvAuthorLbl"
+                style="@style/boldText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/author"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvAuthor"
+                style="@style/regularMediumText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                app:layout_constraintBaseline_toBaselineOf="@id/tvAuthorLbl"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvAuthorLbl"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="abd reman" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvUrlLbl"
+                style="@style/boldText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/url"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvAuthorLbl" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvUrl"
+                style="@style/regularMediumText"
+                android:layout_width="0dp"
+                android:textIsSelectable="true"
+                android:autoLink="all"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvUrlLbl"
+                app:layout_constraintTop_toTopOf="@id/tvUrlLbl"
+                tools:text="abd reman" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvDownloadUrlLbl"
+                style="@style/boldText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/download_url"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvUrl" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvDownloadUrl"
+                style="@style/regularMediumText"
+                android:layout_width="0dp"
+                android:textIsSelectable="true"
+                android:autoLink="all"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvDownloadUrlLbl"
+                app:layout_constraintTop_toTopOf="@id/tvDownloadUrlLbl"
+                tools:text="abd reman" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

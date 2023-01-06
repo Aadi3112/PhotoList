@@ -10,15 +10,19 @@ import androidx.paging.LoadState
 import com.example.photolist.adpter.PhotoPagerAdpter
 import com.example.photolist.data.remote.api.RetrofitService
 import com.example.photolist.databinding.ActivityMainBinding
+import com.example.photolist.databinding.LayoutDialogBinding
+import com.example.photolist.model.Photo
+import com.example.photolist.model.PhotoClickListner
 import com.example.photolist.repository.PhotoRepository
 import com.example.photolist.viewmodel.PhotoViewModel
 import com.example.photolist.viewmodel.PhotoViewModelFactory
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
     lateinit var viewModel: PhotoViewModel
-    private val adapter = PhotoPagerAdpter()
+
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,6 +32,11 @@ class MainActivity : AppCompatActivity() {
 
         val retrofitService = RetrofitService.getInstance()
         val repository = PhotoRepository(retrofitService)
+
+        val adapter = PhotoPagerAdpter(PhotoClickListner {
+            openDialog(it)
+            //Toast.makeText(this, it.author, Toast.LENGTH_SHORT).show()
+        })
         binding.rvPhotoList.adapter = adapter
 
         binding.swipeToRefresh.setOnRefreshListener {
@@ -35,9 +44,13 @@ class MainActivity : AppCompatActivity() {
             adapter.refresh()
         }
 
-        viewModel = ViewModelProvider(this, PhotoViewModelFactory(repository)).get(PhotoViewModel::class.java)
+        viewModel = ViewModelProvider(
+            this,
+            PhotoViewModelFactory(repository)
+        ).get(PhotoViewModel::class.java)
 
         viewModel.errorMessage.observe(this) {
+
             Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
         }
 
@@ -71,5 +84,17 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun openDialog(photo: Photo) {
+
+        val dialog = BottomSheetDialog(this)
+        //dialog.setContentView(R.layout.layout_dialog)
+        val dialogBinding: LayoutDialogBinding = LayoutDialogBinding.inflate(layoutInflater)
+        dialog.setContentView(dialogBinding.root)
+        dialogBinding.tvAuthor.text = photo.author
+        dialogBinding.tvUrl.text = photo.url
+        dialogBinding.tvDownloadUrl.text = photo.download_url
+        dialog.show()
     }
 }
