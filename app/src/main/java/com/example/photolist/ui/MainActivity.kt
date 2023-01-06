@@ -30,6 +30,11 @@ class MainActivity : AppCompatActivity() {
         val repository = PhotoRepository(retrofitService)
         binding.rvPhotoList.adapter = adapter
 
+        binding.swipeToRefresh.setOnRefreshListener {
+            binding.swipeToRefresh.isRefreshing = false
+            adapter.refresh()
+        }
+
         viewModel = ViewModelProvider(this, PhotoViewModelFactory(repository)).get(PhotoViewModel::class.java)
 
         viewModel.errorMessage.observe(this) {
